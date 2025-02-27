@@ -70,8 +70,8 @@ const SegmentDisplay: React.FC<SegmentDisplayProps> = ({
     // 数字 - 参考标准16段数码管显示
     '0': [true, true, true, true, true, true, true, true, false, false, false, false, false, false, false, false],
     '1': [false, false, true, true, false, false, false, false, false, false, false, false, false, false, false, false],
-    '2': [true, true, true, false, true, true, true, false, false, false, false, true, false, false, true, false],
-    '3': [true, true, true, true, true, true, false, false, false, false, false, true, false, false, true, false],
+    '2': [true, true, true, false, true, true, true, false, true, true, false, false, false, false, false, false],
+    '3': [true, true, true, true, true, true, false, false, true, true, false, false, false, false, false, false],
     '4': [false, false, true, true, false, false, false, true, true, true, false, false, false, false, false, false],
     '5': [true, true, false, true, true, true, false, true, true, true, false, false, false, false, false, false],
     '6': [true, true, false, true, true, true, true, true, true, true, false, false, false, false, false, false],

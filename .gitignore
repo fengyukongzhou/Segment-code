@@ -39,3 +39,20 @@ yarn-error.log*
 *.log
 *.gz
 *.hot-update.*
+
+# Vercel
+.vercel
+
+# PWA
+**/public/sw.js
+**/public/workbox-*.js
+**/public/worker-*.js
+**/public/sw.js.map
+**/public/workbox-*.js.map
+**/public/worker-*.js.map
+
+# Optional
+.env*.local
+.history/
+*.tsbuildinfo
+next-env.d.ts.map
