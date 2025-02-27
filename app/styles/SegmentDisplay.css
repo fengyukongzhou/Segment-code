@@ -1,0 +1,318 @@
+/* 全局变量定义 */
+:root {
+  --segment-off-color: #1a1a1a;
+  --segment-on-color: #ff0000;
+}
+
+.segment-display {
+  position: relative;
+  width: 80px;
+  height: 140px;
+  margin: 0 2px;
+  display: inline-block;
+}
+
+.segment {
+  position: absolute;
+  width: 12px;
+  height: 50px;
+  background: #1a1a1a;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  z-index: 1;
+}
+
+.segment.active {
+  background: #ff0000;
+  box-shadow: 0 0 15px #ff0000,
+              0 0 25px #ff0000,
+              0 0 35px #ff0000;
+  animation: neon 1.5s ease-in-out infinite alternate;
+  z-index: 2;
+}
+
+/* 标题样式 */
+.title-container {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  animation: float 3s ease-in-out infinite;
+  margin: 0 auto;
+  white-space: nowrap;
+}
+
+/* 标题颜色渐变 */
+.title-segment.color-0 { --segment-color: #ff0000; }
+.title-segment.color-1 { --segment-color: #ff0033; }
+.title-segment.color-2 { --segment-color: #ff0066; }
+.title-segment.color-3 { --segment-color: #ff0099; }
+.title-segment.color-4 { --segment-color: #ff00cc; }
+.title-segment.color-5 { --segment-color: #cc00ff; }
+.title-segment.color-6 { --segment-color: #9900ff; }
+.title-segment.color-7 { --segment-color: #6600ff; }
+.title-segment.color-8 { --segment-color: #3300ff; }
+.title-segment.color-9 { --segment-color: #0000ff; }
+.title-segment.color-10 { --segment-color: #0000ff; }
+
+.segment.active.title-segment {
+  background: var(--segment-color);
+  box-shadow: 0 0 15px var(--segment-color),
+              0 0 25px var(--segment-color),
+              0 0 35px var(--segment-color);
+  animation: none;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.segment-a {
+  top: 0;
+  left: 15px;
+  width: 50px;
+  height: 12px;
+}
+
+.segment-b {
+  top: 15px;
+  right: 0;
+  height: 50px;
+}
+
+.segment-c {
+  bottom: 15px;
+  right: 0;
+  height: 50px;
+}
+
+.segment-d {
+  bottom: 0;
+  left: 15px;
+  width: 50px;
+  height: 12px;
+}
+
+.segment-e {
+  bottom: 15px;
+  left: 0;
+  height: 50px;
+}
+
+.segment-f {
+  top: 15px;
+  left: 0;
+  height: 50px;
+}
+
+.segment-g {
+  top: 62px;
+  left: 15px;
+  width: 50px;
+  height: 12px;
+  z-index: 2;
+}
+
+/* 自定义滚动条样式 */
+.overflow-x-auto {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 0, 0, 0.3) transparent;
+}
+
+.overflow-x-auto::-webkit-scrollbar {
+  height: 6px;
+}
+
+.overflow-x-auto::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.overflow-x-auto::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 0, 0, 0.3);
+  border-radius: 3px;
+}
+
+.overflow-x-auto::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(255, 0, 0, 0.5);
+}
+
+@keyframes neon {
+  from {
+    filter: brightness(100%) contrast(150%);
+  }
+  to {
+    filter: brightness(200%) contrast(200%);
+  }
+}
+
+/* 米字形模式样式 */
+.segment-display.matrix-mode {
+  position: relative;
+  width: 80px;
+  height: 140px;
+  margin: 0 2px;
+  display: inline-block;
+}
+
+.matrix-segment {
+  position: absolute;
+  background: var(--segment-off-color);
+  transition: all 0.3s ease;
+  border-radius: 6px;
+  width: 12px;
+}
+
+.matrix-segment.active {
+  background: var(--segment-on-color);
+  box-shadow: 0 0 15px var(--segment-on-color),
+              0 0 25px var(--segment-on-color),
+              0 0 35px var(--segment-on-color);
+  animation: neon 1.5s ease-in-out infinite alternate;
+  z-index: 2;
+}
+
+/* 外层矩形 */
+/* 上横线(A1、A2) */
+.matrix-a1 {
+  top: 0;
+  left: 15px;
+  width: 25px;
+  height: 12px;
+}
+
+.matrix-a2 {
+  top: 0;
+  right: 15px;
+  width: 25px;
+  height: 12px;
+}
+
+/* 右竖线(B、C) */
+.matrix-b {
+  top: 12px;
+  right: 0;
+  height: 58px;
+}
+
+.matrix-c {
+  bottom: 12px;
+  right: 0;
+  height: 58px;
+}
+
+/* 下横线(D1、D2) */
+.matrix-d1 {
+  bottom: 0;
+  left: 15px;
+  width: 25px;
+  height: 12px;
+}
+
+.matrix-d2 {
+  bottom: 0;
+  right: 15px;
+  width: 25px;
+  height: 12px;
+}
+
+/* 左竖线(E、F，从下到上) */
+.matrix-e {
+  bottom: 12px;
+  left: 0;
+  height: 58px;
+}
+
+.matrix-f {
+  top: 12px;
+  left: 0;
+  height: 58px;
+}
+
+/* 中间米字型 */
+/* 中间横线(G1、G2) */
+.matrix-g1 {
+  top: 64px;
+  left: 15px;
+  width: 25px;
+  height: 12px;
+}
+
+.matrix-g2 {
+  top: 64px;
+  right: 15px;
+  width: 25px;
+  height: 12px;
+}
+
+/* 左上到中间(H) */
+.matrix-h {
+  top: 12px;
+  left: 12px;
+  width: 55px;
+  height: 12px;
+  transform: rotate(60deg);
+  transform-origin: top left;
+  border-radius: 6px;
+}
+
+/* 正上到中间(J) */
+.matrix-j {
+  top: 12px;
+  left: 34px;
+  height: 52px;
+  width: 12px;
+}
+
+/* 右上到中间(K) */
+.matrix-k {
+  top: 12px;
+  right: 12px;
+  width: 55px;
+  height: 12px;
+  transform: rotate(-60deg);
+  transform-origin: top right;
+  border-radius: 6px;
+}
+
+/* 右下到中间(L) */
+.matrix-l {
+  bottom: 12px;
+  right: 12px;
+  width: 55px;
+  height: 12px;
+  transform: rotate(60deg);
+  transform-origin: bottom right;
+  border-radius: 6px;
+}
+
+/* 正下到中间(M) */
+.matrix-m {
+  bottom: 12px;
+  left: 34px;
+  height: 52px;
+  width: 12px;
+}
+
+/* 左下到中间(N) */
+.matrix-n {
+  bottom: 12px;
+  left: 12px;
+  width: 55px;
+  height: 12px;
+  transform: rotate(-60deg);
+  transform-origin: bottom left;
+  border-radius: 6px;
+}
+
+/* 标题模式下的激活样式 */
+.title-segment.matrix-segment.active {
+  background: var(--segment-color);
+  box-shadow: 0 0 15px var(--segment-color),
+              0 0 25px var(--segment-color),
+              0 0 35px var(--segment-color);
+  animation: none;
+}
