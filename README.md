@@ -4,6 +4,8 @@
 
 一个基于 Next.js 和 React 开发的现代化段码显示器，具有霓虹灯效果和渐变色标题。支持7段码和16段码两种显示模式。
 
+🔗 在线演示：[https://segment-code.vercel.app/](https://segment-code.vercel.app/)
+
 ![LED Display Demo](demo.gif)
 
 ## 功能特点
@@ -15,7 +17,6 @@
 - 🔄 支持7段码和16段码切换
 - 💾 支持下载段码图片
 - 🎨 现代化 UI 界面
-- 📱 响应式设计，支持移动端
 
 ## 技术栈
 

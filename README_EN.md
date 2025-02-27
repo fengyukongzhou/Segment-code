@@ -4,6 +4,8 @@ English | [简体中文](./README.md)
 
 A modern LED segment display built with Next.js and React, featuring neon light effects and gradient title animations. Supports both 7-segment and 16-segment display modes.
 
+🔗 Live Demo: [https://segment-code.vercel.app/](https://segment-code.vercel.app/)
+
 ![LED Display Demo](demo.gif)
 
 ## Features
@@ -15,7 +17,6 @@ A modern LED segment display built with Next.js and React, featuring neon light 
 - 🔄 Toggle between 7-segment and 16-segment modes
 - 💾 Save display as image
 - 🎨 Modern UI design
-- 📱 Responsive design for mobile devices
 
 ## Tech Stack
 
