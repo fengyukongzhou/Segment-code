@@ -17,6 +17,8 @@ A modern LED segment display built with Next.js and React, featuring neon light 
 - 🔄 Toggle between 7-segment and 16-segment modes
 - 💾 Save display as image
 - 🎨 Modern UI design
+- 🎭 Multiple theme options
+- 🌐 Language switch (English/Chinese)
 
 ## Tech Stack
 
@@ -80,6 +82,8 @@ npm run dev
 2. **Toggle Display Mode**: Click the toggle button in the bottom right corner to switch between 7-segment and 16-segment modes
 3. **Download Image**: Click the download button to save the current display as a PNG image
 4. **Multiple Words**: Use spaces to separate different words
+5. **Switch Theme**: Use the theme selector to switch between different display themes
+6. **Switch Language**: Click the language button in the top right corner to toggle between English and Chinese
 
 ## Implementation Details
 

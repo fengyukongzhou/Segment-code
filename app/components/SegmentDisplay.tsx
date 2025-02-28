@@ -5,13 +5,15 @@ interface SegmentDisplayProps {
   isTitle?: boolean;
   colorIndex?: number;
   displayMode?: 'segment' | 'matrix';
+  theme?: 'classic' | 'cyberpunk' | 'retro' | 'minimal' | 'nature' | 'aurora';
 }
 
 const SegmentDisplay: React.FC<SegmentDisplayProps> = ({ 
   value, 
   isTitle = false, 
   colorIndex = 0,
-  displayMode = 'segment'
+  displayMode = 'segment',
+  theme = 'classic'
 }) => {
   // 定义段码映射
   const segmentMaps: { [key: string]: boolean[] } = {
@@ -146,9 +148,10 @@ const SegmentDisplay: React.FC<SegmentDisplayProps> = ({
   }
 
   const titleClass = isTitle ? `title-segment color-${colorIndex}` : '';
+  const themeClass = `theme-${theme}`;
 
   return (
-    <div className={`segment-display ${displayMode === 'matrix' ? 'matrix-mode' : ''}`}>
+    <div className={`segment-display ${displayMode === 'matrix' ? 'matrix-mode' : ''} ${themeClass}`}>
       {displayMode === 'segment' ? (
         <>
           <div className={`segment segment-a ${segments[0] ? `active ${titleClass}` : ''}`} />

@@ -1,7 +1,43 @@
 /* 全局变量定义 */
 :root {
-  --segment-off-color: #1a1a1a;
+  --segment-off-color: rgba(255, 0, 0, 0.1);
   --segment-on-color: #ff0000;
+  
+  /* 经典主题 */
+  --classic-off: rgba(255, 0, 0, 0.1);
+  --classic-primary: #ff0000;
+  --classic-secondary: #ff0000;
+  --classic-accent: #ff0000;
+  
+  /* 赛博朋克主题 */
+  --cyberpunk-off: rgba(0, 255, 249, 0.1);
+  --cyberpunk-primary: #00fff9;
+  --cyberpunk-secondary: #ff00ff;
+  --cyberpunk-accent: #ffff00;
+  
+  /* 复古波普主题 */
+  --retro-off: rgba(255, 107, 107, 0.1);
+  --retro-primary: #ff6b6b;
+  --retro-secondary: #ffd93d;
+  --retro-accent: #ff8e3c;
+  
+  /* 极简冷调主题 */
+  --minimal-off: rgba(74, 144, 226, 0.1);
+  --minimal-primary: #4a90e2;
+  --minimal-secondary: #5cb3ff;
+  --minimal-accent: #87ceeb;
+  
+  /* 自然渐变主题 */
+  --nature-off: rgba(46, 204, 113, 0.1);
+  --nature-primary: #2ecc71;
+  --nature-secondary: #27ae60;
+  --nature-accent: #a8e6cf;
+  
+  /* 梦幻极光主题 */
+  --aurora-off: rgba(148, 0, 211, 0.1);
+  --aurora-primary: #9400D3;
+  --aurora-secondary: #4B0082;
+  --aurora-accent: #0000FF;
 }
 
 .segment-display {
@@ -16,7 +52,6 @@
   position: absolute;
   width: 12px;
   height: 50px;
-  background: #1a1a1a;
   border-radius: 6px;
   transition: all 0.3s ease;
   z-index: 1;
@@ -160,19 +195,9 @@
 
 .matrix-segment {
   position: absolute;
-  background: var(--segment-off-color);
   transition: all 0.3s ease;
   border-radius: 6px;
   width: 12px;
-}
-
-.matrix-segment.active {
-  background: var(--segment-on-color);
-  box-shadow: 0 0 15px var(--segment-on-color),
-              0 0 25px var(--segment-on-color),
-              0 0 35px var(--segment-on-color);
-  animation: neon 1.5s ease-in-out infinite alternate;
-  z-index: 2;
 }
 
 /* 外层矩形 */
@@ -315,4 +340,148 @@
               0 0 25px var(--segment-color),
               0 0 35px var(--segment-color);
   animation: none;
+}
+
+/* 主题样式 */
+.theme-classic .segment,
+.theme-classic .matrix-segment {
+  background: var(--classic-off);
+}
+
+.theme-cyberpunk .segment,
+.theme-cyberpunk .matrix-segment {
+  background: var(--cyberpunk-off);
+}
+
+.theme-retro .segment,
+.theme-retro .matrix-segment {
+  background: var(--retro-off);
+}
+
+.theme-minimal .segment,
+.theme-minimal .matrix-segment {
+  background: var(--minimal-off);
+}
+
+.theme-nature .segment,
+.theme-nature .matrix-segment {
+  background: var(--nature-off);
+}
+
+.theme-aurora .segment,
+.theme-aurora .matrix-segment {
+  background: var(--aurora-off);
+}
+
+.theme-classic .segment.active,
+.theme-classic .matrix-segment.active {
+  background: var(--classic-primary);
+  box-shadow: 0 0 15px var(--classic-primary),
+              0 0 25px var(--classic-secondary),
+              0 0 35px var(--classic-accent);
+  animation: neon 1.5s ease-in-out infinite alternate;
+}
+
+.theme-cyberpunk .segment.active,
+.theme-cyberpunk .matrix-segment.active {
+  background: var(--cyberpunk-primary);
+  box-shadow: 0 0 15px var(--cyberpunk-primary),
+              0 0 25px var(--cyberpunk-secondary),
+              0 0 35px var(--cyberpunk-accent);
+  animation: cyberpunk-pulse 1.5s ease-in-out infinite alternate;
+}
+
+.theme-retro .segment.active,
+.theme-retro .matrix-segment.active {
+  background: var(--retro-primary);
+  box-shadow: 0 0 15px var(--retro-primary),
+              0 0 25px var(--retro-secondary),
+              0 0 35px var(--retro-accent);
+  animation: retro-fade 2s ease-in-out infinite;
+}
+
+.theme-minimal .segment.active,
+.theme-minimal .matrix-segment.active {
+  background: var(--minimal-primary);
+  box-shadow: 0 0 15px var(--minimal-primary),
+              0 0 25px var(--minimal-secondary);
+  animation: minimal-breath 3s ease-in-out infinite;
+}
+
+.theme-nature .segment.active,
+.theme-nature .matrix-segment.active {
+  background: var(--nature-primary);
+  box-shadow: 0 0 15px var(--nature-primary),
+              0 0 25px var(--nature-secondary);
+  animation: nature-flow 4s ease-in-out infinite;
+}
+
+.theme-aurora .segment.active,
+.theme-aurora .matrix-segment.active {
+  background: linear-gradient(45deg, var(--aurora-primary), var(--aurora-secondary), var(--aurora-accent));
+  background-size: 200% 200%;
+  box-shadow: 0 0 15px var(--aurora-primary),
+              0 0 25px var(--aurora-secondary);
+  animation: aurora-wave 5s ease-in-out infinite;
+}
+
+/* 新增动画效果 */
+@keyframes cyberpunk-pulse {
+  0% {
+    filter: hue-rotate(0deg) brightness(100%);
+  }
+  100% {
+    filter: hue-rotate(360deg) brightness(150%);
+  }
+}
+
+@keyframes retro-fade {
+  0%, 100% {
+    background: var(--retro-primary);
+  }
+  50% {
+    background: var(--retro-secondary);
+  }
+}
+
+@keyframes minimal-breath {
+  0%, 100% {
+    opacity: 0.8;
+    filter: brightness(100%);
+  }
+  50% {
+    opacity: 1;
+    filter: brightness(130%);
+  }
+}
+
+@keyframes nature-flow {
+  0%, 100% {
+    background: var(--nature-primary);
+    filter: brightness(100%);
+  }
+  30% {
+    background: var(--nature-secondary);
+    filter: brightness(110%);
+  }
+  50% {
+    background: var(--nature-accent);
+    filter: brightness(120%);
+  }
+  70% {
+    background: var(--nature-secondary);
+    filter: brightness(110%);
+  }
+}
+
+@keyframes aurora-wave {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
