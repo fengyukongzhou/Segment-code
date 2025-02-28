@@ -159,10 +159,11 @@ export default function Home() {
           href="https://github.com/fengyukongzhou/Segment-code"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-white/80 hover:text-white transition-colors"
+          className="text-white/80 hover:text-white transition-colors flex items-center gap-2 px-4 py-2 
+            bg-black/20 backdrop-blur-lg rounded-xl border border-white/20 hover:border-white/40"
           title={textContent[language].viewSource}
         >
-          <FaGithub className="w-8 h-8" />
+          <FaGithub className="w-6 h-6" />
         </a>
       </div>
 
