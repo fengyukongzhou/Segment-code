@@ -66,23 +66,41 @@ export default function Home() {
       offscreenDiv.style.position = 'absolute';
       offscreenDiv.style.left = '-9999px';
       offscreenDiv.style.top = '0';
-      offscreenDiv.style.opacity = '1';  // 保持可见性
-      offscreenDiv.style.transform = 'none';  // 防止变换影响
+      offscreenDiv.style.opacity = '1';
+      offscreenDiv.style.transform = 'none';
       
       // 复制原始容器的完整HTML和类名
       offscreenDiv.innerHTML = container.outerHTML;
       const clonedContainer = offscreenDiv.children[0] as HTMLElement;
       
+      // 添加导出专用样式
+      const exportStyle = document.createElement('style');
+      exportStyle.textContent = `
+        .segment:not(.active),
+        .matrix-segment:not(.active) {
+          opacity: 0 !important;
+        }
+      `;
+      offscreenDiv.appendChild(exportStyle);
+      
       // 确保克隆容器继承所有必要的样式
       clonedContainer.style.transform = 'none';
       clonedContainer.style.transition = 'none';
       clonedContainer.style.animation = 'none';
+      clonedContainer.style.padding = '20px';
       
       // 处理所有子元素
       const processElement = (element: HTMLElement) => {
         element.style.transform = 'none';
         element.style.transition = 'none';
         element.style.animation = 'none';
+        
+        // 处理未激活的段码
+        if ((element.classList.contains('segment') || element.classList.contains('matrix-segment')) 
+            && !element.classList.contains('active')) {
+          element.style.opacity = '0';
+        }
+        
         Array.from(element.children).forEach(child => {
           if (child instanceof HTMLElement) {
             processElement(child);
@@ -95,14 +113,14 @@ export default function Home() {
       // 添加到文档中
       document.body.appendChild(offscreenDiv);
       
-      // 等待更长时间确保样式完全应用
+      // 等待样式应用
       await new Promise(resolve => setTimeout(resolve, 300));
       
       // 获取尺寸并截图
       const canvas = await html2canvas(clonedContainer, {
         backgroundColor: null,
         scale: 2,
-        logging: true,  // 开启日志以便调试
+        logging: false,
         useCORS: true,
         allowTaint: true,
         onclone: (clonedDoc) => {
