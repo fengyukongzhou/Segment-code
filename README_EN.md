@@ -108,6 +108,12 @@ npm run dev
 - Segment display image export using html2canvas
 - Transparent background support
 - High-resolution output (2x scaling)
+- Complete neon light glow effect preservation
+- Multi-line text export support
+- Automatic export image size adjustment
+- Original style and theme preservation
+- Support for all display modes export
+- Optimized image quality and clarity
 
 ## Contributing
 

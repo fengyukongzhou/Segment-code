@@ -6,7 +6,7 @@
 
 🔗 在线演示：[https://segment-code.vercel.app/](https://segment-code.vercel.app/)
 
-![LED Display Demo](demo.gif)
+![文字创意拷贝自第6届阿联酋国际海报节（EIPF）金奖作品](demo.gif)
 
 ## 功能特点
 
@@ -108,6 +108,12 @@ npm run dev
 - 使用 html2canvas 实现段码图片导出
 - 支持透明背景
 - 高清图片输出（2x 缩放）
+- 保留完整的霓虹灯发光效果
+- 支持多行文本导出
+- 自动调整导出图片尺寸
+- 保持原始样式和主题效果
+- 支持所有显示模式的导出
+- 优化的图片质量和清晰度
 
 ## 贡献
 

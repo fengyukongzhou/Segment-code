@@ -60,76 +60,77 @@ export default function Home() {
     
     try {
       const container = displayContentRef.current;
-      const wordsContainers = container.getElementsByClassName('word-container');
-      const innerContainers = container.getElementsByClassName('inner-container');
-      const segments = container.getElementsByClassName('segment');
-      const matrixSegments = container.getElementsByClassName('matrix-segment');
       
-      const originalStyles = {
-        container: {
-          padding: container.style.padding,
-          gap: container.style.gap,
-          display: container.style.display,
-        }
+      // 创建一个离屏容器
+      const offscreenDiv = document.createElement('div');
+      offscreenDiv.style.position = 'absolute';
+      offscreenDiv.style.left = '-9999px';
+      offscreenDiv.style.top = '0';
+      offscreenDiv.style.opacity = '1';  // 保持可见性
+      offscreenDiv.style.transform = 'none';  // 防止变换影响
+      
+      // 复制原始容器的完整HTML和类名
+      offscreenDiv.innerHTML = container.outerHTML;
+      const clonedContainer = offscreenDiv.children[0] as HTMLElement;
+      
+      // 确保克隆容器继承所有必要的样式
+      clonedContainer.style.transform = 'none';
+      clonedContainer.style.transition = 'none';
+      clonedContainer.style.animation = 'none';
+      
+      // 处理所有子元素
+      const processElement = (element: HTMLElement) => {
+        element.style.transform = 'none';
+        element.style.transition = 'none';
+        element.style.animation = 'none';
+        Array.from(element.children).forEach(child => {
+          if (child instanceof HTMLElement) {
+            processElement(child);
+          }
+        });
       };
       
-      container.style.padding = '0';
-      container.style.gap = '0';
-      container.style.display = 'inline-flex';
+      processElement(clonedContainer);
       
-      Array.from(wordsContainers).forEach((el) => {
-        if (el instanceof HTMLElement) {
-          el.style.padding = '0';
-          el.style.margin = '0';
-        }
-      });
+      // 添加到文档中
+      document.body.appendChild(offscreenDiv);
       
-      Array.from(innerContainers).forEach((el) => {
-        if (el instanceof HTMLElement) {
-          el.style.padding = '0';
-          el.style.margin = '0';
-        }
-      });
-
-      Array.from(segments).forEach((el) => {
-        if (el instanceof HTMLElement && !el.classList.contains('active')) {
-          el.style.background = 'transparent';
-          el.style.boxShadow = 'none';
-        }
-      });
-
-      Array.from(matrixSegments).forEach((el) => {
-        if (el instanceof HTMLElement && !el.classList.contains('active')) {
-          el.style.background = 'transparent';
-          el.style.boxShadow = 'none';
-        }
-      });
+      // 等待更长时间确保样式完全应用
+      await new Promise(resolve => setTimeout(resolve, 300));
       
-      const canvas = await html2canvas(container, {
+      // 获取尺寸并截图
+      const canvas = await html2canvas(clonedContainer, {
         backgroundColor: null,
         scale: 2,
-        logging: false,
-        removeContainer: true,
-      });
-      
-      container.style.padding = originalStyles.container.padding;
-      container.style.gap = originalStyles.container.gap;
-      container.style.display = originalStyles.container.display;
-      
-      Array.from(segments).forEach((el) => {
-        if (el instanceof HTMLElement && !el.classList.contains('active')) {
-          el.style.background = '';
-          el.style.boxShadow = '';
+        logging: true,  // 开启日志以便调试
+        useCORS: true,
+        allowTaint: true,
+        onclone: (clonedDoc) => {
+          // 复制所有样式表
+          const styles = document.getElementsByTagName('style');
+          Array.from(styles).forEach(style => {
+            const newStyle = clonedDoc.createElement('style');
+            newStyle.textContent = style.textContent;
+            clonedDoc.head.appendChild(newStyle);
+          });
+          
+          // 复制所有link标签（外部样式表）
+          const links = document.getElementsByTagName('link');
+          Array.from(links).forEach(link => {
+            if (link.rel === 'stylesheet') {
+              const newLink = clonedDoc.createElement('link');
+              newLink.rel = 'stylesheet';
+              newLink.href = link.href;
+              clonedDoc.head.appendChild(newLink);
+            }
+          });
         }
       });
-
-      Array.from(matrixSegments).forEach((el) => {
-        if (el instanceof HTMLElement && !el.classList.contains('active')) {
-          el.style.background = '';
-          el.style.boxShadow = '';
-        }
-      });
       
+      // 清理临时DOM
+      document.body.removeChild(offscreenDiv);
+      
+      // 下载图片
       const link = document.createElement('a');
       link.download = `led-display-${Date.now()}.png`;
       link.href = canvas.toDataURL('image/png');
@@ -181,41 +182,47 @@ export default function Home() {
         ))}
       </div>
 
-      <div className="w-full max-w-4xl mx-auto space-y-10">
+      <div className="w-full max-w-[95vw] mx-auto space-y-10">
         <div className="flex flex-col items-center gap-8">
           <div className="w-full max-w-lg relative group">
-            <input
-              type="text"
+            <textarea
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder={textContent[language].inputPlaceholder}
+              rows={input.includes('\n') ? 3 : 1}
               className="w-full min-w-[300px] min-h-[60px] px-6 py-4 text-lg bg-opacity-10 bg-white backdrop-blur-lg rounded-2xl 
                 border border-white/20 focus:border-white/40 focus:ring-4 focus:ring-white/10 
                 outline-none transition-all duration-300 text-white placeholder-white/50
-                shadow-lg group-hover:shadow-xl"
+                shadow-lg group-hover:shadow-xl resize-none"
             />
             <div className="absolute inset-0 -z-10 bg-gradient-to-r from-primary-color/20 to-secondary-color/20 
               blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"/>
           </div>
           
-          <div ref={displayContentRef} 
-            className="w-3/4 min-h-[400px] flex flex-wrap justify-center gap-6 p-10 bg-black/20 backdrop-blur-xl 
-              rounded-2xl border border-white/10 shadow-2xl hover:shadow-3xl transition-all duration-500
-              animate-[glow_3s_ease-in-out_infinite]">
-            {input.split(' ').map((word, wordIndex) => (
-              <div key={wordIndex} className="word-container flex justify-center items-center hover:scale-105 transition-transform">
-                <div className="inner-container flex">
-                  {word.split('').map((char, charIndex) => (
-                    <SegmentDisplay
-                      key={charIndex}
-                      value={char}
-                      displayMode={displayMode}
-                      theme={theme}
-                    />
+          <div className="w-full overflow-x-auto rounded-2xl">
+            <div ref={displayContentRef} 
+              className={`min-w-full w-max ${input.includes('\n') ? 'min-h-[400px]' : 'min-h-[200px]'} flex flex-col items-center gap-6 p-10 bg-black/20 backdrop-blur-xl 
+                rounded-2xl border border-white/10 shadow-2xl hover:shadow-3xl transition-all duration-500
+                animate-[glow_3s_ease-in-out_infinite]`}>
+              {input.split('\n').map((line, lineIndex) => (
+                <div key={lineIndex} className="w-full flex flex-wrap justify-center items-start gap-6">
+                  {line.split(/\s+/).filter(word => word.length > 0).map((word, wordIndex) => (
+                    <div key={`${lineIndex}-${wordIndex}`} className="word-container flex justify-center items-center hover:scale-105 transition-transform">
+                      <div className="inner-container flex">
+                        {word.split('').map((char, charIndex) => (
+                          <SegmentDisplay
+                            key={charIndex}
+                            value={char}
+                            displayMode={displayMode}
+                            theme={theme}
+                          />
+                        ))}
+                      </div>
+                    </div>
                   ))}
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
 
