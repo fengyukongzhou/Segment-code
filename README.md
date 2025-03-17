@@ -1,131 +1,131 @@
-# 霓虹段码显示器 (LED Display)
+# LED Display
 
-[English](./README_EN.md) | 简体中文
+English | [简体中文](./README.md)
 
-一个基于 Next.js 和 React 开发的现代化段码显示器，具有霓虹灯效果和渐变色标题。支持7段码和16段码两种显示模式。
+A modern LED segment display built with Next.js and React, featuring neon light effects and gradient title animations. Supports both 7-segment and 16-segment display modes.
 
-🔗 在线演示：[https://segment-code.vercel.app/](https://segment-code.vercel.app/)
+🔗 Live Demo: [https://segment-code.vercel.app/](https://segment-code.vercel.app/)
 
-![文字创意拷贝自第6届阿联酋国际海报节（EIPF）金奖作品](demo.gif)
+![LED Display Demo](demo.gif)
 
-## 功能特点
+## Features
 
-- 🌈 渐变色标题动画效果
-- 💡 霓虹灯发光效果
-- ⌨️ 实时段码显示
-- 🎯 支持数字和字母输入
-- 🔄 支持7段码和16段码切换
-- 💾 支持下载段码图片
-- 🎨 现代化 UI 界面
-- 🎭 多主题切换功能
-- 🌐 中英文界面切换
+- 🌈 Gradient title animation effects
+- 💡 Neon light glow effects
+- ⌨️ Real-time segment display
+- 🎯 Support for numbers and letters
+- 🔄 Toggle between 7-segment and 16-segment modes
+- 💾 Save display as image
+- 🎨 Modern UI design
+- 🎭 Multiple theme options
+- 🌐 Language switch (English/Chinese)
 
-## 技术栈
+## Tech Stack
 
-- **前端框架**：
+- **Frontend Framework**:
   - Next.js 14.1.0
   - React 18.2.0
   - TypeScript
 
-- **样式解决方案**：
+- **Styling Solutions**:
   - Tailwind CSS
-  - CSS3 动画
-  - CSS 自定义属性 (CSS Variables)
+  - CSS3 Animations
+  - CSS Custom Properties (CSS Variables)
 
-- **特色技术**：
-  - CSS Grid/Flexbox 布局
-  - CSS 动画和过渡效果
-  - TypeScript 类型系统
+- **Key Technologies**:
+  - CSS Grid/Flexbox Layout
+  - CSS Animations and Transitions
+  - TypeScript Type System
   - React Hooks
-  - 组件化开发
-  - HTML5 Canvas (用于图片导出)
+  - Component-based Development
+  - HTML5 Canvas (for image export)
 
-## 项目结构
+## Project Structure
 
 ```
 segment-code/
 ├── app/
 │   ├── components/
-│   │   └── SegmentDisplay.tsx    # 段码显示组件
+│   │   └── SegmentDisplay.tsx    # Segment display component
 │   ├── styles/
-│   │   └── SegmentDisplay.css    # 段码样式
-│   ├── layout.tsx               # 布局组件
-│   └── page.tsx                 # 主页面
+│   │   └── SegmentDisplay.css    # Segment styles
+│   ├── layout.tsx               # Layout component
+│   └── page.tsx                 # Main page
 ├── package.json
 ├── tsconfig.json
 └── README.md
 ```
 
-## 本地开发
+## Local Development
 
-1. 克隆项目
+1. Clone the repository
 ```bash
 git clone [repository-url]
 cd segment-code
 ```
 
-2. 安装依赖
+2. Install dependencies
 ```bash
 npm install
 ```
 
-3. 启动开发服务器
+3. Start the development server
 ```bash
 npm run dev
 ```
 
-4. 打开浏览器访问 http://localhost:3000
+4. Open http://localhost:3000 in your browser
 
-## 使用说明
+## Usage Guide
 
-1. **输入文字**：在输入框中输入数字或字母
-2. **切换显示模式**：点击右下角的切换按钮，可在7段码和16段码之间切换
-3. **下载图片**：点击下载按钮，可将当前显示的段码保存为PNG图片
-4. **多单词显示**：可以使用空格分隔不同的单词
-5. **切换主题**：通过主题选择器可以切换不同的显示主题
-6. **切换语言**：点击右上角的语言按钮可在中英文之间切换
+1. **Input Text**: Enter numbers or letters in the input field
+2. **Toggle Display Mode**: Click the toggle button in the bottom right corner to switch between 7-segment and 16-segment modes
+3. **Download Image**: Click the download button to save the current display as a PNG image
+4. **Multiple Words**: Use spaces to separate different words
+5. **Switch Theme**: Use the theme selector to switch between different display themes
+6. **Switch Language**: Click the language button in the top right corner to toggle between English and Chinese
 
-## 实现细节
+## Implementation Details
 
-### 段码显示
+### Segment Display
 
-- 使用 CSS Grid 实现段码布局
-- 通过 CSS 变量实现动态颜色控制
-- 使用 box-shadow 实现霓虹灯发光效果
-- 支持7段码和16段码两种显示模式
-- 实现了完整的字母和数字映射
+- CSS Grid layout for segment arrangement
+- Dynamic color control using CSS variables
+- Neon light effects using box-shadow
+- Support for both 7-segment and 16-segment displays
+- Complete mapping for letters and numbers
 
-### 动画效果
+### Animation Effects
 
-- 标题浮动动画
-- 霓虹灯闪烁效果
-- 渐变色过渡
-- 平滑的状态转换
-- 按钮交互动画
+- Title floating animation
+- Neon light flicker effect
+- Gradient color transitions
+- Smooth state transitions
+- Button interaction animations
 
-### 图片导出
+### Image Export
 
-- 使用 html2canvas 实现段码图片导出
-- 支持透明背景
-- 高清图片输出（2x 缩放）
-- 保留完整的霓虹灯发光效果
-- 支持多行文本导出
-- 自动调整导出图片尺寸
-- 保持原始样式和主题效果
-- 支持所有显示模式的导出
-- 优化的图片质量和清晰度
+- Segment display image export using html2canvas
+- Transparent background support
+- High-resolution output (2x scaling)
+- Complete neon light glow effect preservation
+- Multi-line text export support
+- Automatic export image size adjustment
+- Original style and theme preservation
+- Support for all display modes export
+- Optimized image quality and clarity
 
-## 贡献
+## Contributing
 
-欢迎提交 Issue 和 Pull Request！
+Issues and Pull Requests are welcome!
 
-## 许可
+## License
 
 MIT License
 
-## 致谢
+## Acknowledgments
 
-- Next.js 团队
-- React 社区
-- Tailwind CSS 团队
-- html2canvas 项目 
+- Next.js Team
+- React Community
+- Tailwind CSS Team
+- html2canvas Project 
